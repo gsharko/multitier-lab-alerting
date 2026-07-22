@@ -22,6 +22,7 @@ reduces notification volume by **83.9%** (1406 → 227) with zero false negative
 | `scripts/b0_notify_failure.sh` + `b0-counter-notify.service` | Optional systemd `OnFailure=` hook — sends a push notification if the shadow counter itself stops running, so a multi-week unattended run doesn't silently go dark. |
 | `data-raw/` | Raw extracted signals for the 20-day evaluation window (27 June – 17 July 2026): `l1_uptimekuma_important.csv`, `l3_pve_tasks.csv`, `l3_pbs_tasks.csv`, `l2_influx_thresholds_summary.csv`, plus the latency and load-test raw samples. |
 | `grafana-b0-live-dashboard.json` | Importable Grafana dashboard for the live B0-vs-B1 shadow run. |
+| `figures/` | Paper figures: the multi-tier decision model (§3), the alerting integration architecture (§4), and the B0-vs-B1 result chart (§5.1). |
 | `B0-LIVE-RUN.md` | Full deployment runbook for the live shadow counter, including the design rationale for using a read-only tap instead of reconfiguring production alerting. |
 
 ## Reproducing the primary result (§5.1)
