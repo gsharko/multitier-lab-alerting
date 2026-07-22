@@ -11,6 +11,7 @@ version: "1.0.0"
 date-released: "2026-07-22"
 license: MIT
 repository-code: "https://github.com/gsharko/multitier-lab-alerting"
+doi: "10.5281/zenodo.21488139"
 keywords:
   - alert fatigue
   - multi-tier alerting
