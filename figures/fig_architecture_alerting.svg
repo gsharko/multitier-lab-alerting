@@ -1,0 +1,95 @@
+<svg width="780" height="480" viewBox="0 0 780 480" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>Alerting integration architecture</title>
+<desc>Telemetry pipeline (MQTT to Telegraf to InfluxDB to Grafana) and three native event/availability sources (Uptime Kuma, Proxmox VE/PBS, TrueNAS) all integrate into the ntfy notification hub through distinct paths, which reaches the operator's phone over Tailscale.</desc>
+<defs>
+<marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5f5e5a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="780" height="480" fill="#ffffff"/>
+
+<!-- L2 telemetry pipeline, top strip -->
+<text x="30" y="26" font-family="sans-serif" font-size="12" font-weight="600" fill="#5F5E5A">L2 telemetry pipeline</text>
+<g>
+<rect x="30" y="36" width="130" height="50" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="95" y="61" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="12" font-weight="600" fill="#2C2C2A">Sensors / metrics</text>
+</g>
+<line x1="160" y1="61" x2="184" y2="61" stroke="#5f5e5a" stroke-width="1.5" marker-end="url(#arrow2)"/>
+<g>
+<rect x="188" y="36" width="120" height="50" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="248" y="61" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="12" font-weight="600" fill="#2C2C2A">MQTT (Mosquitto)</text>
+</g>
+<line x1="308" y1="61" x2="332" y2="61" stroke="#5f5e5a" stroke-width="1.5" marker-end="url(#arrow2)"/>
+<g>
+<rect x="336" y="36" width="100" height="50" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="386" y="61" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="12" font-weight="600" fill="#2C2C2A">Telegraf</text>
+</g>
+<line x1="436" y1="61" x2="460" y2="61" stroke="#5f5e5a" stroke-width="1.5" marker-end="url(#arrow2)"/>
+<g>
+<rect x="464" y="36" width="110" height="50" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="519" y="61" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="12" font-weight="600" fill="#2C2C2A">InfluxDB v2</text>
+</g>
+<line x1="574" y1="61" x2="598" y2="61" stroke="#5f5e5a" stroke-width="1.5" marker-end="url(#arrow2)"/>
+<g>
+<rect x="602" y="36" width="150" height="50" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="677" y="55" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="12" font-weight="600" fill="#04342C">Grafana</text>
+<text x="677" y="72" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#085041">L2 alert rules</text>
+</g>
+
+<!-- other three sources, second row -->
+<g>
+<rect x="30" y="150" width="170" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="115" y="170" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="13" font-weight="600" fill="#04342C">Uptime Kuma</text>
+<text x="115" y="188" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#085041">L1 — availability probes</text>
+</g>
+<g>
+<rect x="230" y="150" width="200" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="330" y="170" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="13" font-weight="600" fill="#04342C">Proxmox VE / PBS</text>
+<text x="330" y="188" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#085041">L3 — task hooks</text>
+</g>
+<g>
+<rect x="460" y="150" width="170" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="545" y="170" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="13" font-weight="600" fill="#04342C">TrueNAS</text>
+<text x="545" y="188" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#085041">L3 — storage alerts</text>
+</g>
+
+<!-- arrows down into ntfy, with integration-path labels -->
+<line x1="677" y1="86" x2="677" y2="110" stroke="#5f5e5a" stroke-width="1.5"/>
+<line x1="677" y1="110" x2="400" y2="110" stroke="#5f5e5a" stroke-width="1.5"/>
+<line x1="400" y1="110" x2="400" y2="248" stroke="#5f5e5a" stroke-width="1.5" marker-end="url(#arrow2)"/>
+<text x="500" y="103" text-anchor="middle" font-family="sans-serif" font-size="10" font-style="italic" fill="#5F5E5A">webhook contact point</text>
+
+<line x1="115" y1="206" x2="115" y2="230" stroke="#5f5e5a" stroke-width="1.5"/>
+<line x1="115" y1="230" x2="360" y2="230" stroke="#5f5e5a" stroke-width="1.5"/>
+<line x1="360" y1="230" x2="360" y2="248" stroke="#5f5e5a" stroke-width="1.5" marker-end="url(#arrow2)"/>
+<text x="180" y="222" text-anchor="middle" font-family="sans-serif" font-size="10" font-style="italic" fill="#5F5E5A">built-in ntfy integration</text>
+
+<line x1="330" y1="206" x2="330" y2="248" stroke="#5f5e5a" stroke-width="1.5" marker-end="url(#arrow2)"/>
+<text x="330" y="216" text-anchor="middle" font-family="sans-serif" font-size="10" font-style="italic" fill="#5F5E5A">native webhook (severity-matched)</text>
+
+<line x1="545" y1="206" x2="545" y2="230" stroke="#5f5e5a" stroke-width="1.5"/>
+<line x1="545" y1="230" x2="440" y2="230" stroke="#5f5e5a" stroke-width="1.5"/>
+<line x1="440" y1="230" x2="440" y2="248" stroke="#5f5e5a" stroke-width="1.5" marker-end="url(#arrow2)"/>
+<text x="600" y="222" text-anchor="middle" font-family="sans-serif" font-size="10" font-style="italic" fill="#5F5E5A">SMTP → ntfy listener</text>
+
+<!-- ntfy hub -->
+<g>
+<rect x="270" y="252" width="260" height="76" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="400" y="274" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="15" font-weight="700" fill="#2C2C2A">ntfy — notification hub</text>
+<rect x="288" y="292" width="70" height="24" rx="12" fill="#FBE4E1" stroke="#B23A2E" stroke-width="0.5"/>
+<text x="323" y="304" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#7A2318">critical</text>
+<rect x="365" y="292" width="70" height="24" rx="12" fill="#FCEFD9" stroke="#B8791A" stroke-width="0.5"/>
+<text x="400" y="304" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#6B4E0E">warning</text>
+<rect x="442" y="292" width="70" height="24" rx="12" fill="#E3EEFB" stroke="#2E5FA3" stroke-width="0.5"/>
+<text x="477" y="304" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#1B3A66">info</text>
+</g>
+
+<line x1="400" y1="328" x2="400" y2="360" stroke="#5f5e5a" stroke-width="1.5" marker-end="url(#arrow2)"/>
+<text x="470" y="346" text-anchor="middle" font-family="sans-serif" font-size="10" font-style="italic" fill="#5F5E5A">p50 = 230 ms (§5.3)</text>
+
+<g>
+<rect x="300" y="364" width="200" height="56" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="400" y="384" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="14" font-weight="600" fill="#2C2C2A">Operator's phone</text>
+<text x="400" y="402" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="11" fill="#444441">ntfy app, via Tailscale</text>
+</g>
+
+<text x="390" y="450" text-anchor="middle" font-family="sans-serif" font-size="12" font-style="italic" fill="#5F5E5A">Fig. — Alerting integration architecture (§4): four independent paths converge on a single ntfy hub.</text>
+</svg>
