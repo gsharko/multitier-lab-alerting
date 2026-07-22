@@ -1,0 +1,17 @@
+[Unit]
+Description=Paper 4 live B0 counter (read-only, i kthyeshëm; NUK prek konfigurimin B1 live)
+After=network-online.target
+Wants=network-online.target
+OnFailure=b0-counter-notify.service
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/b0-counter/env
+ExecStart=/usr/bin/python3 /opt/b0-counter/b0_counter.py
+Restart=always
+RestartSec=30
+# StartLimit i çaktivizuar — degradim i qetë nëse një burim s'arrihet
+StartLimitIntervalSec=0
+
+[Install]
+WantedBy=multi-user.target

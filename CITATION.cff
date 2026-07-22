@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use these scripts or the accompanying dataset, please cite the paper and this repository."
+title: "multitier-lab-alerting: Reference implementation and evaluation dataset for context-aware multi-tier alerting in a heterogeneous on-premise laboratory"
+type: software
+authors:
+  - family-names: "Sharko"
+    given-names: "Genci"
+    orcid: "https://orcid.org/0009-0008-0051-9589"
+    affiliation: "Faculty of Electrical Engineering, Polytechnic University of Tirana"
+version: "1.0.0"
+date-released: "2026-07-22"
+license: MIT
+repository-code: "https://github.com/gsharko/multitier-lab-alerting"
+keywords:
+  - alert fatigue
+  - multi-tier alerting
+  - laboratory telemetry
+  - on-premise IoT
+  - MQTT
+  - InfluxDB
+  - alarm management

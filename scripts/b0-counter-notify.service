@@ -1,0 +1,7 @@
+[Unit]
+Description=Njofto ntfy kur b0-counter.service deshton (Paper 4 live B0 run)
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/b0-counter/env
+ExecStart=/opt/b0-counter/b0_notify_failure.sh

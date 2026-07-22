@@ -1,0 +1,22 @@
+time,monitor,status,msg,duration_s,note
+2026-06-27 22:17:49.159,pve1,1,200 - OK,0,setup_first_check_exclude
+2026-06-27 22:18:58.277,pve2,1,200 - OK,0,setup_first_check_exclude
+2026-06-27 22:19:37.502,pbs,1,200 - OK,0,setup_first_check_exclude
+2026-06-27 22:20:32.547,DL360,1,200 - OK,0,setup_first_check_exclude
+2026-06-27 22:21:24.367,pfSense,1,200 - OK,0,setup_first_check_exclude
+2026-06-27 22:22:17.765,TrueNAS,1,200 - OK,0,setup_first_check_exclude
+2026-06-27 22:23:09.362,NextCloud,1,200 - OK,0,setup_first_check_exclude
+2026-06-27 22:23:51.617,Grafana,1,200 - OK,0,setup_first_check_exclude
+2026-06-27 22:25:07.675,ntfy,1,200 - OK,0,setup_first_check_exclude
+2026-06-27 22:26:00.766,pi-hole,2,Request failed with status code 403,0,setup_first_check_exclude
+2026-06-27 22:27:52.523,NPM,1,200 - OK,0,setup_first_check_exclude
+2026-06-27 22:28:36.156,Open WebUI,1,200 - OK,0,setup_first_check_exclude
+2026-06-27 22:30:18.884,test-down,0,connect EHOSTUNREACH 192.168.20.99:12345,0,synthetic_test_monitor_exclude
+2026-07-01 07:09:02.493,Open WebUI,0,connect EHOSTUNREACH 192.168.20.50:3000,60,real_incident
+2026-07-01 10:01:32.634,Open WebUI,1,200 - OK,10350,real_incident
+2026-07-02 17:56:53.100,Open WebUI,0,connect EHOSTUNREACH 192.168.20.50:3000,60,real_incident
+2026-07-02 18:41:55.452,Open WebUI,1,200 - OK,2702,real_incident
+2026-07-15 22:30:27.249,NextCloud,0,Request failed with status code 502,60,real_incident
+2026-07-15 23:04:29.326,NextCloud,1,200 - OK,61,real_incident
+2026-07-15 23:14:30.924,NextCloud,0,Request failed with status code 502,60,real_incident
+2026-07-16 00:10:32.910,NextCloud,1,200 - OK,60,real_incident

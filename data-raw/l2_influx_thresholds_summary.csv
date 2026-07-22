@@ -1,0 +1,18 @@
+rule,source,threshold,interval,n_samples,n_above,n_episodes
+Node CPU i lartë,pve1,0.8,1m,26302,0,0
+Node CPU i lartë,pve2,0.8,1m,26304,69,19
+Disk/Storage i lartë,iso-storage,85,5m,5136,0,0
+Disk/Storage i lartë,iso-storage-pve1,85,5m,10273,0,0
+Disk/Storage i lartë,local,85,5m,15408,0,0
+Disk/Storage i lartë,local-lvm,85,5m,15408,0,0
+Disk/Storage i lartë,local-storage,85,5m,5135,0,0
+Disk/Storage i lartë,nextcloud-data,85,5m,5137,0,0
+Disk/Storage i lartë,pbs,85,5m,15402,0,0
+Disk/Storage i lartë,pbs-copy,85,5m,736,0,0
+Disk/Storage i lartë,truenas-backups,85,5m,10273,830,3
+RAM i lartë,dl360,90,5m,5264,0,0
+RAM i lartë,pve1,90,5m,5266,0,0
+RAM i lartë,pve2,90,5m,5266,0,0
+Temperature e lartë,dl360,60,5m,14928,0,0
+Temperature e lartë,pve1,60,5m,82192,0,0
+Temperature e lartë,pve2,60,5m,18665,0,0
