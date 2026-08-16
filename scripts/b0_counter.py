@@ -16,7 +16,10 @@ I kthyeshëm plotësisht: `systemctl stop b0-counter` → gjithçka ndalon, asgj
 
 --- Burimet (të gjitha read-only) ---
   L2 (InfluxDB threshold): LOKAL te CT104 — evaluon 4 rregullat Grafana (CPU>0.8, Disk>85,
-      RAM>90, Temp>60) mbi dritaren e ciklit; B0 += mostra mbi prag, B1 += episode (start).
+      RAM>90, Temp>60) mbi dritaren e ciklit; B0 += mostra mbi prag, B1 += 2 × episode
+      (Firing + Resolved, sjellja e Grafana-s — shih rreshtin `b1 = episodes * 2` më poshtë).
+      KUJDES: kjo do të thotë që B1 është më i vogël se B0 vetëm kur një episod zgjat më shumë se
+      2 mostra. Për episode të shkurtra B1 > B0 — shih §5.2/§7.1 të artikullit.
   L1 (Uptime Kuma): SSH te CT107 (DL360), lexon heartbeat.db (important=1) të reja në dritare.
   L3 (PVE/PBS tasks): SSH te pve1/PBS, numëron task-et e reja (OK=info, fail=critical).
 

@@ -1,11 +1,22 @@
 # Live sequential B0 run — runbook (Paper 4, Task #12)
 
-> **✅ LIVE që nga 18 Korrik 2026** — shërbimi `b0-counter.service` është `active` te CT104
-> (telemetry, 192.168.20.11). Numëron çdo orë. Smoke test i validuar: L3 ktheu 19 task / 6h (B0=19, B1=3).
-> Të dhënat e testit u fshinë; seria live nisi e pastër nga 18 Korrik. Lëre 2-4 javë, pastaj krahaso
-> `b0_total/b1_total` me -83.9% të simulimit historik.
+> ## ✅ XHIROJA U MBYLL — 16 Gusht 2026
+>
+> 29 ditë të plota (18 Korrik 00:00 → 16 Gusht 00:00 UTC), 682 nga ~696 cikle orare (14 të humbura nga
+> 3 ndërprerje të shkurtra të InfluxDB — vonesë watermark-u, jo humbje të dhënash).
+>
+> **Rezultati: B0=1555, B1=1166 — agregat 25.0%, jo 83.9% e replay-it.** Ndarja sipas shtresave:
+> L1 140→140 (0.0%), L2 548→**704** (**−28.5%**), L3 867→322 (62.9%).
+> **Event-based (L1+L3): 1007→462, 54.1%, zero FN** — ky është pretendimi i vlefshëm i artikullit.
+>
+> Shkaku i mospërputhjes: B1(L2) = `2 × episode`, pra kompreson vetëm kur episodi zgjat mbi 2 mostra.
+> Live: 1.56 mostra/episod → B1 dërgon më shumë se flat. Replay: 40.9 mostra/episod, sepse një gjendje e
+> vetme disk-full (`truenas-backups`, 830 mostra / 3 episode) përbënte 59% të sinjaleve B0.
+> Shpjegimi i plotë te §5.2/§7.1 i artikullit. Seria ditore: `data-raw/b0_shadow_live_daily.csv`.
+>
+> Pjesa më poshtë është **runbook-u i deploy-it**, i ruajtur për riprodhueshmëri.
 
-**Qëllimi:** validim LIVE forward-looking i simulimit historik (1406→227, -83.9%). Një shërbim
+**Qëllimi (kur u ndërtua):** validim LIVE forward-looking i simulimit historik (1406→227, -83.9%). Një shërbim
 (`b0_counter.py`) numëron në kohë reale sa njoftime do dërgonte **B0** (flat) vs **B1** (tri-shtresor)
 nga të njëjtat sinjale reale, dhe i shkruan te InfluxDB (`b0_shadow`). Grafana pastaj tregon dy vija
 kumulative gjatë 2-4 javëve.
@@ -124,10 +135,11 @@ systemctl start b0-counter-notify.service
 journalctl -u b0-counter-notify -n 5 --no-pager
 ```
 
-## Sa gjatë?
+## Sa gjatë? (plani origjinal — u zbatua)
 
-Lëre 2-4 javë. Sa më gjatë, aq më i fortë krahasimi live. Rezultati final: `b0_total / b1_total` mbi periudhën
-→ % reduktim live, për ta krahasuar me 83.9% të simulimit historik.
+Plani ishte 2-4 javë. **U lanë 29 ditë** (18 Korrik – 16 Gusht 2026); rezultatet janë në krye të skedarit.
+Mësimi për çdo xhiro të ardhshme: krahasoje **sipas shtresave**, jo vetëm `b0_total / b1_total` — agregati
+fsheh faktin që L2 dhe L3 sillen në kahe të kundërta.
 
 ## Ndalimi (kthim i plotë)
 
