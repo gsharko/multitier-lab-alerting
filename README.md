@@ -1,8 +1,9 @@
 # multitier-lab-alerting
 
 Reference implementation, raw evaluation data, and reproduction scripts for the paper
-**"Context-Aware Multi-Tier Alerting for Heterogeneous On-Premise Laboratory Telemetry"**
-(UPT, Faculty of Electrical Engineering — Measurement Lab).
+**"Duration-Dependent Suppression in Multi-Tier Fault Management: A Paired Replay and Live-Shadow
+Evaluation of Notification Policies"** by Anni Dasho (Luarasi University, Tirana) and Genci Sharko
+(Faculty of Electrical Engineering, Polytechnic University of Tirana).
 
 The paper proposes a three-layer alerting model — availability (L1), metrics/threshold (L2), and
 native system events (L3) — with an explicit decision rule (`signal → layer → severity → channel`,
@@ -21,15 +22,15 @@ paper's result** and should not be cited without this context.
 | Path | Contents |
 |---|---|
 | `scripts/simulate_b0_b1.py` | Core B0 (flat) vs B1 (multi-tier) replay simulator — the primary evaluation script (§5.1 of the paper). Reads the raw signal CSVs in `data-raw/` and reproduces the replay-window result (1406 → 227 aggregate; 507 → 183 on the event-based layers). |
-| `scripts/make_figures.py` | Generates the paper's result figures from `data-raw/` — the replay decomposition (Fig. 3) and the live cumulative B0-vs-B1 chart (Fig. 4). |
+| `scripts/make_figures.py` | Generates the paper's result figures from `data-raw/` — the replay decomposition (Fig. 3), the per-object composition of the live availability-layer signals (Fig. 4), and the live cumulative B0-vs-B1 chart (Fig. 5). |
 | `scripts/latency_sensor_dashboard.py` | Sensor-to-dashboard latency measurement (MQTT publish → InfluxDB queryable), §5.3. |
 | `scripts/latency_ntfy_dispatch.py` | Event-to-notification-dispatch latency (trigger → ntfy server ack), §5.3. |
 | `scripts/loadtest_mqtt.py` | MQTT ingestion throughput / loss-point load test, §5.4. |
 | `scripts/b0_counter.py` + `b0-counter.service` + `b0-counter.env.template` | The live, read-only "shadow counter" used for forward-looking validation (§5.2) — taps the same three signal sources in production and counts what each configuration *would* have sent, without touching live alerting. |
 | `scripts/b0_notify_failure.sh` + `b0-counter-notify.service` | Optional systemd `OnFailure=` hook — sends a push notification if the shadow counter itself stops running, so a multi-week unattended run doesn't silently go dark. |
-| `data-raw/` | Raw extracted signals for the 20-day replay window (27 June – 17 July 2026): `l1_uptimekuma_important.csv`, `l3_pve_tasks.csv`, `l3_pbs_tasks.csv`, `l2_influx_thresholds_summary.csv`, plus the latency and load-test raw samples. `b0_shadow_live_daily.csv` holds the 29-day live shadow run's daily B0/B1 series (18 July – 16 August 2026). |
+| `data-raw/` | Raw extracted signals for the 20-day replay window (27 June – 17 July 2026): `l1_uptimekuma_important.csv`, `l3_pve_tasks.csv`, `l3_pbs_tasks.csv`, `l2_influx_thresholds_summary.csv`, plus the latency and load-test raw samples. `b0_shadow_live_daily.csv` holds the 29-day live shadow run's daily B0/B1 series (18 July – 16 August 2026), and `l1_uptimekuma_live_important.csv` (140 rows, reconciling exactly with the reported B0(L1) = 140) with its per-object summary `l1_uptimekuma_live_bymonitor.csv` carry the availability-layer composition behind §5.2. The free-text `msg` column has its internal addresses replaced by `<host>:<port>`; no script reads that column and no reported number derives from it. |
 | `grafana-b0-live-dashboard.json` | Importable Grafana dashboard for the live B0-vs-B1 shadow run. |
-| `figures/` | Paper figures: the multi-tier decision model (§3), the alerting integration architecture (§4), the replay decomposition by layer (Fig. 3, §5.1), and the live cumulative B0-vs-B1 chart (Fig. 4, §5.2). |
+| `figures/` | Paper figures: the multi-tier decision model (§3), the alerting integration architecture (§4), the replay decomposition by layer (Fig. 3, §5.1), the per-object composition of the live availability-layer signals (Fig. 4, §5.2), and the live cumulative B0-vs-B1 chart (Fig. 5, §5.2). |
 | `B0-LIVE-RUN.md` | Full deployment runbook for the live shadow counter, including the design rationale for using a read-only tap instead of reconfiguring production alerting. |
 
 ## Reproducing the replay result (§5.1)

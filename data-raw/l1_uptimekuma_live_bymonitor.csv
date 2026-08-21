@@ -1,0 +1,16 @@
+monitor,events,down,up,real_incident,scheduled_power_cycle,repeat_no_state_change,in_replay_window
+Open WebUI,42,21,21,8,34,0,yes
+pve1,34,17,17,2,32,0,yes
+NVR Shinobi (Lalëz),33,23,9,18,0,14,no
+pfSense,11,6,5,10,0,1,yes
+TrueNAS,4,2,2,4,0,0,yes
+pve2,2,1,1,2,0,0,yes
+pbs,2,1,1,2,0,0,yes
+pi-hole,2,1,1,2,0,0,yes
+Grafana,2,1,1,2,0,0,yes
+ntfy,2,1,1,2,0,0,yes
+NPM,2,1,1,2,0,0,yes
+AI-Lab daily health-check (pve2),1,0,1,1,0,0,no
+CT111 claude (cron),1,0,1,1,0,0,no
+NVR — kanarina e njoftimeve,1,0,1,1,0,0,no
+ntfy — upstream (push iOS),1,0,1,1,0,0,no

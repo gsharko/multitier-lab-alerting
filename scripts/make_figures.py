@@ -15,11 +15,14 @@ Inputs (both in ../data-raw/):
   l2_influx_thresholds_summary.csv  — per-rule replay counts (n_above, n_episodes)
   b0_shadow_live_daily.csv          — daily per-layer live counts (date,layer,b0,b1)
 
-Outputs (../figures/): fig3_replay_decomposition.png, fig4_live_cumulative.png
+Outputs (../figures/): fig3_replay_decomposition.png, fig4_l1_composition.png,
+fig5_live_cumulative.png. Figure numbers follow the order of first citation in the
+manuscript, as Springer requires, which is why the composition figure is Fig. 4.
 Run: python3 make_figures.py     (needs matplotlib; no network access required)
 """
 import csv
 import os
+import re
 from collections import defaultdict
 
 import matplotlib
@@ -38,8 +41,29 @@ C_B1 = "#2E8B6F"      # multi-tier green
 C_OUTLIER = "#C8794A" # the truenas-backups excursion
 GRID = "#D8D5CC"
 
+# Springer submission mode (SPRINGER_SUBMISSION=1) applies the JNSM artwork rules:
+# sans-serif lettering (Arial/Helvetica), no title inside the illustration — the
+# journal takes the caption from the manuscript text — the 174 mm single-column
+# width, and vector PDF alongside a 600 dpi raster.
+SUBMISSION = os.environ.get("SPRINGER_SUBMISSION") == "1"
+WIDTH_IN = 174 / 25.4          # 174 mm, Springer single-column text area
+MAX_H_IN = 234 / 25.4          # 234 mm
+PAD_IN = 0.02                  # the sliver bbox_inches="tight" keeps around the ink
+FLOOR_PT = 8.0                 # Springer will not set figure lettering below this
+
+
+def small(pt):
+    """A small type size for the reading copy, clamped to the journal floor.
+
+    Legends and dense tick labels are set below 8 pt on screen, where the figure is
+    read at whatever size the window gives it. At 174 mm the journal measures the
+    type, so under SUBMISSION nothing is allowed under 8 pt.
+    """
+    return max(pt, FLOOR_PT) if SUBMISSION else pt
+
 plt.rcParams.update({
-    "font.family": "DejaVu Sans",
+    "font.family": ["Arial", "DejaVu Sans"] if SUBMISSION
+                   else "DejaVu Sans",
     "font.size": 9,
     "axes.edgecolor": "#555555",
     "axes.labelcolor": "#222222",
@@ -60,6 +84,66 @@ with open(os.path.join(DATA, "l2_influx_thresholds_summary.csv"), newline="") as
 outlier = next(r for r in rows if r["source"] == "truenas-backups")
 OUT_B0 = int(outlier["n_above"])                 # 830
 OUT_B1 = int(outlier["n_episodes"]) * 2          # 6  (Firing + Resolved)
+
+def headline(obj, text, **kw):
+    """Set a title that summarizes the figure — omitted in submission mode, where
+    Springer requires the caption to live in the manuscript, not in the artwork."""
+    if SUBMISSION:
+        return
+    (obj.suptitle if hasattr(obj, "suptitle") else obj.set_title)(text, **kw)
+
+
+def panel_label(ax, letter):
+    """Lowercase part label, as Springer requires for multi-part figures."""
+    ax.text(-0.02, 1.06, f"({letter})", transform=ax.transAxes, ha="right",
+            va="bottom", fontsize=9, fontweight="bold")
+
+
+def pdf_width_mm(pdf):
+    """The width of the page as the file itself declares it."""
+    with open(pdf, "rb") as f:
+        head = f.read(4096)
+    m = re.search(rb"/MediaBox\s*\[\s*([\d.]+) ([\d.]+) ([\d.]+) ([\d.]+)", head)
+    assert m, "no MediaBox in " + pdf
+    return (float(m.group(3)) - float(m.group(1))) / 72 * 25.4
+
+
+def save_at_width(fig, pdf):
+    """Write the PDF and resize until the page really is 174 mm wide.
+
+    bbox_inches="tight" crops to the ink rather than to the canvas, and the ink does
+    not scale with the canvas — type sizes are fixed in points — so the canvas size
+    that yields a 174 mm page has to be found by iteration. Measuring the written
+    file closes the loop on the artefact that is actually submitted.
+    """
+    for _ in range(12):
+        fig.savefig(pdf, bbox_inches="tight", pad_inches=PAD_IN)
+        mm = pdf_width_mm(pdf)
+        if abs(mm - 174.0) < 0.15:
+            return
+        w, h = fig.get_size_inches()
+        k = 174.0 / mm
+        fig.set_size_inches(w * k, min(h * k, MAX_H_IN))
+    raise AssertionError("%s settled at %.1f mm, not 174" % (pdf, mm))
+
+
+def save(fig, stem, number):
+    """Write the working PNG, or the submission-ready vector + 600 dpi raster."""
+    if not SUBMISSION:
+        out = os.path.join(FIGS, stem + ".png")
+        fig.savefig(out, bbox_inches="tight")
+        print("wrote", out)
+        return
+    sub = os.path.join(FIGS, "submission")
+    os.makedirs(sub, exist_ok=True)
+    pdf = os.path.join(sub, f"Fig{number}.pdf")
+    save_at_width(fig, pdf)
+    print("wrote", pdf)
+    png = os.path.join(sub, f"Fig{number}.png")
+    fig.savefig(png, bbox_inches="tight", pad_inches=PAD_IN, dpi=600)
+    print("wrote", png)
+
+
 L2_TOTAL_B0 = sum(int(r["n_above"]) for r in rows)
 assert L2_TOTAL_B0 == REPLAY["L2\n(metric threshold)"]["b0"], L2_TOTAL_B0
 
@@ -112,17 +196,15 @@ def fig3():
              lbls.index("B1 — multi-tier policy"),
              next(i for i, l in enumerate(lbls) if l.startswith("of which"))]
     ax.legend([handles[i] for i in order], [lbls[i] for i in order],
-              fontsize=7.6, frameon=False, loc="upper left", handlelength=1.3)
-    ax.set_title("Replay evaluation decomposes unevenly across layers", fontsize=10,
-                 fontweight="bold", pad=8, loc="left")
+              fontsize=small(7.6), frameon=False, loc="upper left", handlelength=1.3)
+    headline(ax, "Replay evaluation decomposes unevenly across layers", fontsize=10,
+             fontweight="bold", pad=8, loc="left")
     fig.subplots_adjust(bottom=0.24)
-    out = os.path.join(FIGS, "fig3_replay_decomposition.png")
-    fig.savefig(out, bbox_inches="tight")
+    save(fig, "fig3_replay_decomposition", 3)
     plt.close(fig)
-    print("wrote", out)
 
 
-def fig4():
+def fig_live_cumulative():
     per_layer = defaultdict(lambda: {"dates": [], "b0": [], "b1": []})
     with open(os.path.join(DATA, "b0_shadow_live_daily.csv"), newline="") as f:
         for r in csv.DictReader(f):
@@ -167,16 +249,137 @@ def fig4():
         for s in ("top", "right"):
             ax.spines[s].set_visible(False)
         ax.set_xlim(0, n - 1)
+    for letter, ax in zip("abc", axes):
+        panel_label(ax, letter)
     axes[0].set_ylabel("cumulative notifications")
-    axes[0].legend(fontsize=7.6, frameon=False, loc="upper left")
-    fig.suptitle("Live shadow run: the threshold layer diverges while the event layers converge",
-                 fontsize=10, fontweight="bold", x=0.008, ha="left", y=1.06)
-    out = os.path.join(FIGS, "fig4_live_cumulative.png")
-    fig.savefig(out, bbox_inches="tight")
+    axes[0].legend(fontsize=small(7.6), frameon=False, loc="upper left")
+    headline(fig, "Live shadow run: the threshold layer diverges while the event layers converge",
+             fontsize=10, fontweight="bold", x=0.008, ha="left", y=1.06)
+    save(fig, "fig5_live_cumulative", 5)
     plt.close(fig)
-    print("wrote", out)
+
+
+
+
+# --- Fig. 5 (§5.2): composition of the live availability layer ---------------
+# L1 is the one layer where the policy reduced nothing (140 -> 140). The figure
+# shows why: only 41% of the window's availability signals are the independent
+# incidents the rule was designed for. Read entirely from the per-object export
+# so it cannot drift from the data.
+C_REAL   = "#2E8B6F"  # independent real incidents  (the intended population)
+C_SCHED  = "#C8794A"  # scheduled power cycle, host's own transitions
+C_DEP    = "#E3B58C"  # same cycle, restated by a dependent object
+C_REPEAT = "#4C6E8A"  # repeat notification, no intervening state change
+C_PEND   = "#9A9691"  # pending-state marker
+
+CAT = [
+    ("real_incident", "independent real incident", C_REAL),
+    ("scheduled_power_cycle", "scheduled power cycle (host)", C_SCHED),
+    ("scheduled_power_cycle_dependent", "same cycle, dependent object", C_DEP),
+    ("repeat_no_state_change", "repeat, no state change", C_REPEAT),
+    ("pending_not_down", "pending-state marker", C_PEND),
+]
+
+
+def fig_l1_composition():
+    path = os.path.join(DATA, "l1_uptimekuma_live_important.csv")
+    with open(path, newline="", encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+    assert len(rows) == 140, f"expected 140 live L1 rows, got {len(rows)}"
+
+    per = defaultdict(lambda: defaultdict(int))
+    for r in rows:
+        per[r["monitor"]][r["note"]] += 1
+    order = sorted(per, key=lambda m: -sum(per[m].values()))
+
+    # anonymise object names: the paper identifies roles, not hostnames
+    ROLE = {
+        "Open WebUI": "application service (on host A)",
+        "pve1": "virtualization host A",
+        "NVR Shinobi (Lalëz)": "remote recorder (overlay link)",
+        "pfSense": "router / firewall",
+        "TrueNAS": "storage appliance",
+        "pve2": "virtualization host B",
+        "pbs": "backup server",
+        "pi-hole": "DNS resolver",
+        "Grafana": "dashboarding service",
+        "ntfy": "notification hub",
+        "NPM": "reverse proxy",
+    }
+    labels = [ROLE.get(m, "other service") for m in order]
+    # collapse the single-signal tail into one row
+    keep, tail = [], defaultdict(int)
+    for m, lab in zip(order, labels):
+        if sum(per[m].values()) >= 2:
+            keep.append((lab, per[m]))
+        else:
+            for k, v in per[m].items():
+                tail[k] += v
+    if tail:
+        keep.append((f"{len(order) - len(keep)} further objects (1 signal each)", tail))
+
+    fig, (ax, ax2) = plt.subplots(
+        1, 2, figsize=(9.4, 3.5), gridspec_kw={"width_ratios": [2.55, 1]})
+
+    panel_label(ax, "a")
+    panel_label(ax2, "b")
+    ys = range(len(keep))
+    left = [0] * len(keep)
+    for key, lab, col in CAT:
+        vals = [d.get(key, 0) for _, d in keep]
+        if not any(vals):
+            continue
+        ax.barh(list(ys), vals, left=left, color=col, label=lab,
+                height=0.68, edgecolor="white", linewidth=0.6)
+        left = [l + v for l, v in zip(left, vals)]
+    ax.set_yticks(list(ys))
+    ax.set_yticklabels([lab for lab, _ in keep], fontsize=8.2)
+    ax.invert_yaxis()
+    ax.set_xlabel("availability signals in the live window")
+    ax.xaxis.grid(True, color=GRID, linewidth=0.7)
+    ax.set_axisbelow(True)
+    for s in ("top", "right", "left"):
+        ax.spines[s].set_visible(False)
+    ax.tick_params(axis="y", length=0)
+    ax.legend(fontsize=small(7.4), frameon=False, loc="lower right", ncol=1)
+    headline(ax, "140 signals, three objects carry 78% of them",
+             fontsize=9, fontweight="bold", loc="left")
+
+    # right panel: what the categories sum to
+    tot = defaultdict(int)
+    for r in rows:
+        tot[r["note"]] += 1
+    sched = tot["scheduled_power_cycle"] + tot["scheduled_power_cycle_dependent"]
+    bars = [("real\nincidents", tot["real_incident"], C_REAL),
+            ("scheduled\ncycle", sched, C_SCHED),
+            # at 8 pt "repeat, no / transition" runs into the bar beside it in this
+            # narrow panel; the three-line break also matches the wording of the
+            # legend in panel (a)
+            ("repeat,\nno state\nchange", tot["repeat_no_state_change"], C_REPEAT)]
+    xs = range(len(bars))
+    ax2.bar(list(xs), [b[1] for b in bars], color=[b[2] for b in bars],
+            width=0.62, edgecolor="white", linewidth=0.6)
+    for i, (_, v, _) in enumerate(bars):
+        ax2.text(i, v + 2, f"{v}\n{100*v/140:.0f}%", ha="center", va="bottom",
+                 fontsize=8, fontweight="bold")
+    ax2.set_xticks(list(xs))
+    ax2.set_xticklabels([b[0] for b in bars], fontsize=small(7.8))
+    ax2.set_ylim(0, 88)
+    ax2.yaxis.grid(True, color=GRID, linewidth=0.7)
+    ax2.set_axisbelow(True)
+    ax2.set_ylabel("signals")
+    for s in ("top", "right"):
+        ax2.spines[s].set_visible(False)
+    headline(ax2, "only 41% is what the\nrule was designed to act on",
+             fontsize=9, fontweight="bold", loc="left")
+
+    headline(fig, "Why the availability layer reduced nothing: composition of the 140 live L1 signals",
+             fontsize=10, fontweight="bold", x=0.008, ha="left", y=1.045)
+    save(fig, "fig4_l1_composition", 4)
+    plt.close(fig)
 
 
 if __name__ == "__main__":
     fig3()
-    fig4()
+    fig_l1_composition()   # Fig. 4 — cited first in §5.2
+    fig_live_cumulative()  # Fig. 5

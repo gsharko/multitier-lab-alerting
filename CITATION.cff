@@ -1,8 +1,12 @@
 cff-version: 1.2.0
 message: "If you use these scripts or the accompanying dataset, please cite the paper and this repository."
-title: "multitier-lab-alerting: Reference implementation and evaluation dataset for context-aware multi-tier alerting in a heterogeneous on-premise laboratory"
+title: "multitier-lab-alerting: Reference implementation and evaluation dataset for duration-dependent suppression in multi-tier fault management"
 type: software
 authors:
+  - family-names: "Dasho"
+    given-names: "Anni"
+    orcid: "https://orcid.org/0009-0000-6520-7449"
+    affiliation: "Luarasi University, Tirana"
   - family-names: "Sharko"
     given-names: "Genci"
     orcid: "https://orcid.org/0009-0008-0051-9589"

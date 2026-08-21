@@ -9,18 +9,18 @@
 <!-- Row 1: sources -->
 <g>
 <rect x="40" y="24" width="200" height="60" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
-<text x="140" y="46" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="14" font-weight="600" fill="#2C2C2A">L1 — Availability</text>
-<text x="140" y="66" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="11" fill="#444441">Uptime Kuma (HTTP/TCP)</text>
+<text x="140" y="46" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" fill="#2C2C2A">L1 — Availability</text>
+<text x="140" y="66" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#444441">Uptime Kuma (HTTP/TCP)</text>
 </g>
 <g>
 <rect x="280" y="24" width="200" height="60" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
-<text x="380" y="46" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="14" font-weight="600" fill="#2C2C2A">L2 — Metrics/threshold</text>
-<text x="380" y="66" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="11" fill="#444441">Grafana rules over InfluxDB</text>
+<text x="380" y="46" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" fill="#2C2C2A">L2 — Metrics/threshold</text>
+<text x="380" y="66" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#444441">Grafana rules over InfluxDB</text>
 </g>
 <g>
 <rect x="520" y="24" width="200" height="60" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
-<text x="620" y="46" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="14" font-weight="600" fill="#2C2C2A">L3 — Native events</text>
-<text x="620" y="66" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="11" fill="#444441">PVE/PBS task hooks, TrueNAS</text>
+<text x="620" y="46" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" fill="#2C2C2A">L3 — Native events</text>
+<text x="620" y="66" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#444441">PVE/PBS task hooks, TrueNAS</text>
 </g>
 
 <!-- merge into classify() -->
@@ -33,9 +33,9 @@
 <!-- classify() box -->
 <g>
 <rect x="230" y="132" width="300" height="66" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
-<text x="380" y="153" text-anchor="middle" dominant-baseline="central" font-family="monospace" font-size="14" font-weight="600" fill="#04342C">classify(signal)</text>
-<text x="380" y="173" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="11" fill="#085041">layer, magnitude, persistence → severity</text>
-<text x="380" y="188" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#0F6E56">§3.2</text>
+<text x="380" y="153" text-anchor="middle" dominant-baseline="central" font-family="Courier New, Courier, monospace" font-size="14" font-weight="600" fill="#04342C">classify(signal)</text>
+<text x="380" y="173" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#085041">layer, magnitude, persistence → severity</text>
+<text x="380" y="188" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#0F6E56">§3.2</text>
 </g>
 
 <line x1="380" y1="198" x2="380" y2="222" stroke="#5f5e5a" stroke-width="1.5" marker-end="url(#arrow)"/>
@@ -43,9 +43,9 @@
 <!-- suppression box -->
 <g>
 <rect x="200" y="226" width="360" height="76" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
-<text x="380" y="248" text-anchor="middle" dominant-baseline="central" font-family="monospace" font-size="14" font-weight="600" fill="#04342C">suppress = dedup(window) ∧ flap_guard</text>
-<text x="380" y="268" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="11" fill="#085041">dedup: critical 60s · info 3600s</text>
-<text x="380" y="285" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="11" fill="#085041">flap-guard: 60s persistence (L1)</text>
+<text x="380" y="248" text-anchor="middle" dominant-baseline="central" font-family="Courier New, Courier, monospace" font-size="14" font-weight="600" fill="#04342C">suppress = dedup(window) ∧ flap_guard</text>
+<text x="380" y="268" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#085041">dedup: critical 60s · info 3600s</text>
+<text x="380" y="285" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#085041">flap-guard: 60s persistence (L1)</text>
 </g>
 
 <!-- split into channels -->
@@ -58,18 +58,18 @@
 <!-- Row: ntfy channels, severity-colored -->
 <g>
 <rect x="40" y="344" width="200" height="60" rx="8" fill="#FBE4E1" stroke="#B23A2E" stroke-width="0.5"/>
-<text x="140" y="366" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="14" font-weight="600" fill="#7A2318">ntfy: critical</text>
-<text x="140" y="386" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="11" fill="#8A3A2E">urgent priority</text>
+<text x="140" y="366" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" fill="#7A2318">ntfy: critical</text>
+<text x="140" y="386" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#8A3A2E">urgent priority</text>
 </g>
 <g>
 <rect x="280" y="344" width="200" height="60" rx="8" fill="#FCEFD9" stroke="#B8791A" stroke-width="0.5"/>
-<text x="380" y="366" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="14" font-weight="600" fill="#6B4E0E">ntfy: warning</text>
-<text x="380" y="386" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="11" fill="#7A5A16">default priority</text>
+<text x="380" y="366" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" fill="#6B4E0E">ntfy: warning</text>
+<text x="380" y="386" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#7A5A16">default priority</text>
 </g>
 <g>
 <rect x="520" y="344" width="200" height="60" rx="8" fill="#E3EEFB" stroke="#2E5FA3" stroke-width="0.5"/>
-<text x="620" y="366" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="14" font-weight="600" fill="#1B3A66">ntfy: info</text>
-<text x="620" y="386" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="11" fill="#264C7D">low priority, digest</text>
+<text x="620" y="366" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" fill="#1B3A66">ntfy: info</text>
+<text x="620" y="386" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#264C7D">low priority, digest</text>
 </g>
 
 <!-- merge to phone -->
@@ -81,9 +81,9 @@
 
 <g>
 <rect x="290" y="444" width="180" height="56" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
-<text x="380" y="464" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="14" font-weight="600" fill="#2C2C2A">Operator's phone</text>
-<text x="380" y="484" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="11" fill="#444441">ntfy app, via Tailscale</text>
+<text x="380" y="464" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" fill="#2C2C2A">Operator's phone</text>
+<text x="380" y="484" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#444441">ntfy app, via Tailscale</text>
 </g>
 
-<text x="380" y="530" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="12" font-style="italic" fill="#5F5E5A">Fig. — Multi-tier alerting decision model (§3): signal → layer → severity → suppression → channel.</text>
+<text x="380" y="530" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-size="12" font-style="italic" fill="#5F5E5A">Fig. — Multi-tier alerting decision model (§3): signal → layer → severity → suppression → channel.</text>
 </svg>

@@ -1,0 +1,141 @@
+time,monitor,status,msg,duration_s,note
+2026-07-22 19:00:48.082,Open WebUI,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle_dependent
+2026-07-22 19:02:44.670,pve1,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle
+2026-07-23 05:02:26.552,pve1,1,200 - OK,63,scheduled_power_cycle
+2026-07-23 05:03:35.715,Open WebUI,1,200 - OK,60,scheduled_power_cycle_dependent
+2026-07-23 13:26:45.074,Open WebUI,0,connect EHOSTUNREACH <host>:<port>,60,real_incident
+2026-07-23 14:44:09.639,Open WebUI,1,200 - OK,60,real_incident
+2026-07-23 19:00:14.650,Open WebUI,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle_dependent
+2026-07-23 19:03:25.204,pve1,0,connect EHOSTUNREACH <host>:<port>,74,scheduled_power_cycle
+2026-07-24 05:01:52.852,pve1,1,200 - OK,63,scheduled_power_cycle
+2026-07-24 05:04:05.630,Open WebUI,1,200 - OK,60,scheduled_power_cycle_dependent
+2026-07-24 09:12:52.974,Open WebUI,0,connect ECONNREFUSED <host>:<port>,1721,real_incident
+2026-07-24 09:13:53.325,Open WebUI,1,200 - OK,60,real_incident
+2026-07-24 09:20:53.705,Open WebUI,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle_dependent
+2026-07-24 09:23:03.988,pve1,0,connect EHOSTUNREACH <host>:<port>,63,real_incident
+2026-07-24 09:23:04.437,pve2,0,connect EHOSTUNREACH <host>:<port>,63,real_incident
+2026-07-24 09:23:04.564,pbs,0,connect EHOSTUNREACH <host>:<port>,63,real_incident
+2026-07-24 09:23:06.420,TrueNAS,0,connect EHOSTUNREACH <host>:<port>,63,real_incident
+2026-07-24 09:23:06.555,pi-hole,0,connect EHOSTUNREACH <host>:<port>,63,real_incident
+2026-07-24 09:23:07.828,Grafana,0,connect EHOSTUNREACH <host>:<port>,63,real_incident
+2026-07-24 09:23:08.595,ntfy,0,connect EHOSTUNREACH <host>:<port>,63,real_incident
+2026-07-24 09:23:09.493,NPM,0,connect EHOSTUNREACH <host>:<port>,63,real_incident
+2026-07-24 09:23:23.189,pfSense,0,connect EHOSTUNREACH <host>:<port>,63,real_incident
+2026-07-24 09:24:10.182,pve1,1,200 - OK,66,real_incident
+2026-07-24 09:24:10.183,pve2,1,200 - OK,65,real_incident
+2026-07-24 09:24:10.185,pbs,1,200 - OK,65,real_incident
+2026-07-24 09:24:10.188,TrueNAS,1,200 - OK,63,real_incident
+2026-07-24 09:24:10.188,pi-hole,1,200 - OK,63,real_incident
+2026-07-24 09:24:13.245,ntfy,1,200 - OK,64,real_incident
+2026-07-24 09:24:13.249,Grafana,1,200 - OK,65,real_incident
+2026-07-24 09:24:13.249,NPM,1,200 - OK,63,real_incident
+2026-07-24 09:24:17.267,Open WebUI,1,200 - OK,63,scheduled_power_cycle_dependent
+2026-07-24 09:24:27.535,pfSense,1,200 - OK,64,real_incident
+2026-07-24 10:48:04.723,pfSense,0,connect EHOSTUNREACH <host>:<port>,63,real_incident
+2026-07-24 10:51:14.229,pfSense,1,200 - OK,63,real_incident
+2026-07-24 10:54:32.501,pfSense,0,connect EHOSTUNREACH <host>:<port>,63,real_incident
+2026-07-24 10:55:35.825,pfSense,1,200 - OK,63,real_incident
+2026-07-24 19:00:55.576,Open WebUI,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle_dependent
+2026-07-24 19:02:52.360,pve1,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle
+2026-07-25 12:47:15.060,pve1,1,200 - OK,63,scheduled_power_cycle
+2026-07-25 12:48:35.682,Open WebUI,1,200 - OK,60,scheduled_power_cycle_dependent
+2026-07-25 14:00:40.863,Open WebUI,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle_dependent
+2026-07-25 14:02:34.943,pve1,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle
+2026-07-26 12:46:55.092,pve1,1,200 - OK,63,scheduled_power_cycle
+2026-07-26 12:49:06.465,Open WebUI,1,200 - OK,60,scheduled_power_cycle_dependent
+2026-07-26 14:00:39.435,Open WebUI,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle_dependent
+2026-07-26 14:02:33.001,pve1,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle
+2026-07-27 05:02:01.268,pve1,1,200 - OK,63,scheduled_power_cycle
+2026-07-27 05:04:12.677,Open WebUI,1,200 - OK,60,scheduled_power_cycle_dependent
+2026-07-27 19:00:49.557,Open WebUI,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle_dependent
+2026-07-27 19:02:46.174,pve1,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle
+2026-07-28 05:02:27.614,pve1,1,200 - OK,62,scheduled_power_cycle
+2026-07-28 05:03:36.609,Open WebUI,1,200 - OK,60,scheduled_power_cycle_dependent
+2026-07-28 19:00:44.594,Open WebUI,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle_dependent
+2026-07-28 19:02:41.352,pve1,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle
+2026-07-29 05:02:23.284,pve1,1,200 - OK,63,scheduled_power_cycle
+2026-07-29 05:03:31.554,Open WebUI,1,200 - OK,60,scheduled_power_cycle_dependent
+2026-07-29 19:00:49.006,Open WebUI,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle_dependent
+2026-07-29 19:02:44.977,pve1,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle
+2026-07-30 05:02:27.508,pve1,1,200 - OK,63,scheduled_power_cycle
+2026-07-30 05:03:36.419,Open WebUI,1,200 - OK,60,scheduled_power_cycle_dependent
+2026-07-30 12:09:40.084,TrueNAS,0,connect EHOSTUNREACH <host>:<port>,63,real_incident
+2026-07-30 12:11:46.485,TrueNAS,1,200 - OK,63,real_incident
+2026-07-30 19:00:54.546,Open WebUI,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle_dependent
+2026-07-30 19:02:51.047,pve1,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle
+2026-07-31 05:02:21.236,pve1,1,200 - OK,63,scheduled_power_cycle
+2026-07-31 05:03:41.987,Open WebUI,1,200 - OK,60,scheduled_power_cycle_dependent
+2026-07-31 19:00:45.645,Open WebUI,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle_dependent
+2026-07-31 19:02:43.567,pve1,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle
+2026-08-01 12:47:18.133,pve1,1,200 - OK,63,scheduled_power_cycle
+2026-08-01 12:48:25.377,Open WebUI,1,200 - OK,60,scheduled_power_cycle_dependent
+2026-08-01 14:00:49.932,Open WebUI,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle_dependent
+2026-08-01 14:02:42.142,pve1,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle
+2026-08-02 12:47:01.813,pve1,1,200 - OK,63,scheduled_power_cycle
+2026-08-02 12:49:15.525,Open WebUI,1,200 - OK,60,scheduled_power_cycle_dependent
+2026-08-02 14:00:41.137,Open WebUI,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle_dependent
+2026-08-02 14:02:35.325,pve1,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle
+2026-08-03 05:02:03.701,pve1,1,200 - OK,63,scheduled_power_cycle
+2026-08-03 05:04:14.152,Open WebUI,1,200 - OK,60,scheduled_power_cycle_dependent
+2026-08-03 19:00:47.164,Open WebUI,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle_dependent
+2026-08-03 19:02:44.458,pve1,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle
+2026-08-04 05:02:26.679,pve1,1,200 - OK,63,scheduled_power_cycle
+2026-08-04 05:03:34.626,Open WebUI,1,200 - OK,60,scheduled_power_cycle_dependent
+2026-08-04 19:00:47.916,Open WebUI,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle_dependent
+2026-08-04 19:02:44.549,pve1,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle
+2026-08-04 20:59:03.120,NVR Shinobi (Lalëz),2,No heartbeat in the time window,0,pending_not_down
+2026-08-04 21:02:03.199,NVR Shinobi (Lalëz),0,No heartbeat in the time window,60,real_incident
+2026-08-05 05:02:26.036,pve1,1,200 - OK,63,scheduled_power_cycle
+2026-08-05 05:03:35.452,Open WebUI,1,200 - OK,60,scheduled_power_cycle_dependent
+2026-08-05 13:34:44.509,NVR Shinobi (Lalëz),0,No heartbeat in the time window,60,repeat_no_state_change
+2026-08-05 19:00:48.777,Open WebUI,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle_dependent
+2026-08-05 19:02:45.504,pve1,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle
+2026-08-06 05:02:27.509,pve1,1,200 - OK,63,scheduled_power_cycle
+2026-08-06 05:03:36.100,Open WebUI,1,200 - OK,60,scheduled_power_cycle_dependent
+2026-08-06 13:34:40.498,NVR Shinobi (Lalëz),0,No heartbeat in the time window,60,repeat_no_state_change
+2026-08-06 18:54:44.963,NVR Shinobi (Lalëz),1,1 kamera OK,0,real_incident
+2026-08-06 19:00:45.522,Open WebUI,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle_dependent
+2026-08-06 19:02:42.134,pve1,0,connect EHOSTUNREACH <host>:<port>,60,scheduled_power_cycle
+2026-08-06 20:09:03.059,NVR Shinobi (Lalëz),0,No heartbeat in the time window,60,real_incident
+2026-08-06 20:41:01.868,NVR Shinobi (Lalëz),1,1 kamera OK,56,real_incident
+2026-08-06 20:47:03.137,NVR Shinobi (Lalëz),0,No heartbeat in the time window,60,real_incident
+2026-08-07 05:02:23.094,pve1,1,200 - OK,63,scheduled_power_cycle
+2026-08-07 05:03:32.642,Open WebUI,1,200 - OK,60,scheduled_power_cycle_dependent
+2026-08-07 05:14:01.822,NVR Shinobi (Lalëz),1,1 kamera OK,48,real_incident
+2026-08-07 16:59:01.700,NVR Shinobi (Lalëz),0,asnje stream aktiv,60,real_incident
+2026-08-08 04:51:01.116,NVR Shinobi (Lalëz),0,asnje stream aktiv,59,repeat_no_state_change
+2026-08-08 21:13:49.639,Open WebUI,0,connect EHOSTUNREACH <host>:<port>,60,real_incident
+2026-08-08 21:16:04.176,Open WebUI,1,200 - OK,60,real_incident
+2026-08-09 11:18:01.532,NVR Shinobi (Lalëz),0,stream i ngrire: cam27:44s,60,repeat_no_state_change
+2026-08-09 11:19:01.622,NVR Shinobi (Lalëz),0,stream i ngrire: cam27:104s,59,repeat_no_state_change
+2026-08-09 11:20:01.713,NVR Shinobi (Lalëz),0,stream i ngrire: cam27:164s,59,repeat_no_state_change
+2026-08-09 11:21:01.866,NVR Shinobi (Lalëz),0,stream i ngrire: cam27:224s,59,repeat_no_state_change
+2026-08-09 13:32:01.443,NVR Shinobi (Lalëz),0,stream i ngrire: cam27:8084s,18,repeat_no_state_change
+2026-08-09 13:33:01.533,NVR Shinobi (Lalëz),0,stream i ngrire: cam27:8144s,18,repeat_no_state_change
+2026-08-09 13:34:01.624,NVR Shinobi (Lalëz),0,stream i ngrire: cam27:8204s,18,repeat_no_state_change
+2026-08-09 19:34:01.977,NVR Shinobi (Lalëz),1,1 kamera OK,16,real_incident
+2026-08-09 19:58:02.975,NVR Shinobi (Lalëz),0,No heartbeat in the time window,60,real_incident
+2026-08-09 20:02:01.612,NVR Shinobi (Lalëz),1,1 kamera OK,58,real_incident
+2026-08-11 10:06:02.709,NVR Shinobi (Lalëz),0,No heartbeat in the time window,60,real_incident
+2026-08-11 13:34:42.052,NVR Shinobi (Lalëz),0,No heartbeat in the time window,60,repeat_no_state_change
+2026-08-12 07:26:28.468,pfSense,0,connect EHOSTUNREACH <host>:<port>,63,real_incident
+2026-08-12 13:32:44.278,pfSense,0,connect EHOSTUNREACH <host>:<port>,63,repeat_no_state_change
+2026-08-12 13:34:44.045,NVR Shinobi (Lalëz),0,No heartbeat in the time window,60,repeat_no_state_change
+2026-08-13 09:26:13.045,pfSense,1,200 - OK,63,real_incident
+2026-08-13 10:07:02.823,NVR Shinobi (Lalëz),1,1 kamera OK,2,real_incident
+2026-08-13 10:47:33.877,pfSense,0,connect EHOSTUNREACH <host>:<port>,63,real_incident
+2026-08-13 10:48:05.279,NVR Shinobi (Lalëz),0,No heartbeat in the time window,60,real_incident
+2026-08-13 10:57:01.314,NVR Shinobi (Lalëz),1,1 kamera OK,55,real_incident
+2026-08-13 10:57:02.005,pfSense,1,200 - OK,63,real_incident
+2026-08-13 12:12:14.351,Open WebUI,0,connect ECONNREFUSED <host>:<port>,4147,real_incident
+2026-08-13 12:14:15.542,Open WebUI,1,200 - OK,60,real_incident
+2026-08-13 17:59:02.942,AI-Lab daily health-check (pve2),1,prove-token-claude,0,real_incident
+2026-08-14 15:17:09.907,CT111 claude (cron),1,OK,0,real_incident
+2026-08-15 05:39:50.191,NVR — kanarina e njoftimeve,1,test-nga-NVR,0,real_incident
+2026-08-15 05:41:06.208,ntfy — upstream (push iOS),1,konfigurim,0,real_incident
+2026-08-15 12:13:02.271,NVR Shinobi (Lalëz),0,No heartbeat in the time window,60,real_incident
+2026-08-15 12:56:28.887,NVR Shinobi (Lalëz),0,No heartbeat in the time window,60,repeat_no_state_change
+2026-08-15 13:01:01.886,NVR Shinobi (Lalëz),1,2 kamera OK,32,real_incident
+2026-08-15 13:17:02.787,NVR Shinobi (Lalëz),0,No heartbeat in the time window,60,real_incident
+2026-08-15 13:34:41.353,NVR Shinobi (Lalëz),0,No heartbeat in the time window,60,repeat_no_state_change
+2026-08-15 13:48:02.032,NVR Shinobi (Lalëz),1,2 kamera OK,20,real_incident
