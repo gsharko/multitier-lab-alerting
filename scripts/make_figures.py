@@ -93,6 +93,13 @@ def headline(obj, text, **kw):
     (obj.suptitle if hasattr(obj, "suptitle") else obj.set_title)(text, **kw)
 
 
+def reduction_label(pct):
+    """Percentages in the figures use the tables' convention: a reduction is
+    positive, and a layer on which B1 emitted more than B0 is negative. Set with
+    U+2212 rather than a hyphen, since these are typeset inside the artwork."""
+    return f"−{abs(pct):.1f}%" if pct < 0 else f"{pct:.1f}%"
+
+
 def panel_label(ax, letter):
     """Lowercase part label, as Springer requires for multi-part figures."""
     ax.text(-0.02, 1.06, f"({letter})", transform=ax.transAxes, ha="right",
@@ -179,7 +186,7 @@ def fig3():
         ax.annotate("", xy=(i + w / 2, b1 + 60), xytext=(i - w / 2, y_arrow),
                     arrowprops=dict(arrowstyle="->", color=C_B1, linewidth=1.3,
                                     connectionstyle="arc3,rad=-0.25"))
-        ax.text(i + 0.02, y_arrow + 40, f"−{red:.1f}%", ha="center", fontsize=10,
+        ax.text(i + 0.02, y_arrow + 40, reduction_label(red), ha="center", fontsize=10,
                 fontweight="bold", color=C_B1)
 
     ax.set_xticks(list(x))
@@ -240,8 +247,7 @@ def fig_live_cumulative():
         ax.fill_between(xs, cb0, cb1, color=C_OUTLIER if worse else C_B1,
                         alpha=0.16, linewidth=0)
         red = 100.0 * (cb0[-1] - cb1[-1]) / cb0[-1] if cb0[-1] else 0.0
-        sign = "+" if red < 0 else "−"
-        ax.set_title(f"{titles[layer]}\n{sign}{abs(red):.1f}%", fontsize=9,
+        ax.set_title(f"{titles[layer]}\n{reduction_label(red)}", fontsize=9,
                      fontweight="bold", color=C_OUTLIER if worse else "#222222")
         ax.set_xlabel("day of live window")
         ax.yaxis.grid(True, color=GRID, linewidth=0.7)
